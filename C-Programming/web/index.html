@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TECHNICAL PROGRAMMING</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
+            }
+
+            /* Style the header */
+            .header {
+                padding: 80px;
+                text-align: center;
+                background: #102b5a;
+                color: white;
+            }
+
+            /* Increase the font size of the h1 element */
+            .header h1 {
+                font-size: 40px;
+            }
+
+            /* Style the top navigation bar */
+            .navbar {
+                overflow: hidden;
+                background-color: black;
+            }
+
+            /* Style the navigation bar links */
+            .navbar a {
+                float: left;
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 20px;
+                text-decoration: none;
+            }
+
+            /* Right-aligned link */
+            .navbar a.right {
+                float: right;
+            }
+
+            /* Change color on hover */
+            .navbar a:hover {
+                background-color: solid blue;
+                color: black;
+            }
+        </style>
+        <script>
+            var timer;
+            var timerStart;
+            var timeSpentOnSite = getTimeSpentOnSite();
+document.getElementById("time-demo").innerHTML = timeSpentOnSite;
+            function getTimeSpentOnSite() {
+                timeSpentOnSite = parseInt(localStorage.getItem('timeSpentOnSite'));
+                timeSpentOnSite = isNaN(timeSpentOnSite) ? 0 : timeSpentOnSite;
+                return timeSpentOnSite;
+            }
+
+            function startCounting() {
+                timerStart = Date.now();
+                timer = setInterval(function () {
+                    timeSpentOnSite = getTimeSpentOnSite() + (Date.now() - timerStart);
+                    localStorage.setItem('timeSpentOnSite', timeSpentOnSite);
+                    timerStart = parseInt(Date.now());
+                    // Convert to seconds
+                    console.log(parseInt(timeSpentOnSite / 1000));
+                }, 1000);
+            }
+            startCounting();
+
+            var stopCountingWhenWindowIsInactive = true;
+
+            if (stopCountingWhenWindowIsInactive) {
+
+                if (typeof document.hidden !== "undefined") {
+                    var hidden = "hidden",
+                            visibilityChange = "visibilitychange",
+                            visibilityState = "visibilityState";
+                } else if (typeof document.msHidden !== "undefined") {
+                    var hidden = "msHidden",
+                            visibilityChange = "msvisibilitychange",
+                            visibilityState = "msVisibilityState";
+                }
+                var documentIsHidden = document[hidden];
+
+                document.addEventListener(visibilityChange, function () {
+                    if (documentIsHidden != document[hidden]) {
+                        if (document[hidden]) {
+                            // Window is inactive
+                            clearInterval(timer);
+                        } else {
+                            // Window is active
+                            startCounting();
+                        }
+                        documentIsHidden = document[hidden];
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>TECHNICAL PROGRAMMING </h1>
+        </div>
+
+        <div class="navbar">
+            <a class="btn btn-outline-warning" target="target" href="login.jsp">LOGIN PAGE</a>
+
+
+
+
+        </div>
+        <div class="navbar" id="time-demo" >
+          
+
+
+
+
+        </div>
+       
+        <div class="gallery">
+            <a target="_blank" href="img_5terre.jpg">
+                <img src="tu2.jpg" alt="Cinque Terre" width="1350" height="600">
+            </a>
+        </div>
+
+    </body>
+</html>
+
